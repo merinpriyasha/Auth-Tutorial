@@ -1,5 +1,6 @@
 import { User } from "../models/user.model.js";
 import bycrypt from "bcryptjs";
+import { generateTokenAndSetCookie } from "../utils/generateTokenAndSetCookie.js"
 
 export const signup = async (req, res) => {
 
@@ -26,7 +27,7 @@ export const signup = async (req, res) => {
             verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000 //24 hours
         })
 
-        await user.save // save to database
+        await user.save() // save to database
 
         //authenticate in client by creating jwt token (create token and set it to the cookie)
         generateTokenAndSetCookie(res,user._id);
