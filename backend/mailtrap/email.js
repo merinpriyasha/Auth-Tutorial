@@ -24,3 +24,25 @@ export const sendVerificationEmail = async (email, verificationToken) => {
 		throw new Error(`Error sending verification email: ${error}`);
 	}
 };
+
+export const sendWelcomeEmail = async (email, name) =>{
+	const recipient = [{ email }]; // email array
+
+	try {
+		const response = await mailtrapClient.send({
+			from: sender,
+			to: recipient,
+			template_uuid: "9993f4df-527e-4599-a46e-0461b87b0937",  // take this id from mailtrap site(customerized email in mailtrap)
+			template_variables: {
+				company_info_name: "Auth Company",
+				name: name,
+			},
+		});
+
+		console.log("Welcome email sent successfully", response);
+	} catch (error) {
+		console.error(`Error sending welcome email`, error);
+
+		throw new Error(`Error sending welcome email: ${error}`);
+	}
+};
