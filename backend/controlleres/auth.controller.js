@@ -68,7 +68,7 @@ export const verifyEmail = async (req, res) =>{
 
 		await sendWelcomeEmail(user.email, user.name); //generate welcome email by using email template
 
-		res.status(200).json({                         //if we forget to send some response after the perform some logic like above 
+		res.status(200).json({                         //if we forget to send some response after the perform some logic (like above )
 			success: true,                             //then in the postman we couldnot get any message wheter it is sucessfull or failure
 			message: "Email verified successfully",
 			user: {
@@ -87,5 +87,6 @@ export const login = async (req, res) => {
 }
 
 export const logout = async (req, res) => {
-    res.send("logout route");
+    res.clearCookie("token");                        //this is how we clear the token and now the user is unauthonticated & used same token name
+	res.status(200).json({ success: true, message: "Logged out successfully" });
 }
