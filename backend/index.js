@@ -1,15 +1,18 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from "cors";
 import cookieParser from "cookie-parser";
 
 import { connectDB } from './db/connectDB.js';
 
 import authRoutes from "./routes/auth.route.js";
 
+dotenv.config();
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-dotenv.config();
+app.use(cors({ origin: "http://127.0.0.1:5173", credentials: true })); //credential true means we can send the cookies in the request
 
 app.use(express.json());//allows us to parse incoming request : req.body
 app.use(cookieParser()); // allows us to parse incoming cookies
