@@ -12,7 +12,7 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-app.use(cors({ origin: "http://127.0.0.1:5173", credentials: true })); //credential true means we can send the cookies in the request
+app.use(cors({ origin: "http://localhost:5173", credentials: true })); //credential true means we can send the cookies in the request
 
 app.use(express.json());//allows us to parse incoming request : req.body
 app.use(cookieParser()); // allows us to parse incoming cookies
